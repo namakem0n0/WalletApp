@@ -1,4 +1,5 @@
-﻿using WalletApp.Domain.Users.Models;
+﻿using WalletApp.Domain.Transaction.Models;
+using WalletApp.Domain.Users.Models;
 
 namespace WalletApp.Domain.Users.Common
 {

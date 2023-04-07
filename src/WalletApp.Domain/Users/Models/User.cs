@@ -7,7 +7,8 @@ namespace WalletApp.Domain.Users.Models
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
-        public double Balance { get; private set; }
+        public decimal Balance { get; private set; }
+        public long DailyPoints { get; private set; }
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
     }
 }
