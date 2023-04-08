@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WalletApp.API.Constants;
+using WalletApp.API.Users.Mappers;
+using WalletApp.API.Users.Requests;
 using WalletApp.Domain.Common;
 using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Data;
@@ -35,10 +37,12 @@ namespace WalletApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<int> CreateUser(UserCreateData data)
+        public async Task<int> CreateUser(CreateUserRequest request)
         {
+            var data = request.AsData();
             var newUser = Domain.Users.Models.User.Create(data);
             _unitOfWork.Users.Add(newUser);
+
             return newUser.Id;
         }
 
