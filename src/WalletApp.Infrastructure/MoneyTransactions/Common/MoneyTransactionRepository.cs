@@ -14,10 +14,24 @@ namespace WalletApp.Infrastructure.MoneyTransactions.Common
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<MoneyTransaction>> GetAllTransactions()
+        public async Task<IReadOnlyCollection<MoneyTransaction>> GetAllTransactions(int userId)
         {
-            return await _context.MoneyTransactions.ToListAsync();
+            var transactions = await _context.MoneyTransactions
+                .Where(t => t.UserId == userId)
+                .ToListAsync();
+            return transactions.AsReadOnly();
         }
+
+        public async Task<IReadOnlyCollection<MoneyTransaction>> GetLastTenTransactions(int userId)
+        {
+            var transactions = await _context.MoneyTransactions
+                .Where(t => t.UserId == userId)
+                .OrderByDescending(t => t.Date)
+                .Take(10)
+                .ToListAsync();
+            return transactions.AsReadOnly();
+        }
+
 
         public async Task<MoneyTransaction> GetById(int id)
         {

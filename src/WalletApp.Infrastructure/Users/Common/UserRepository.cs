@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WalletApp.Domain.Transaction.Models;
 using WalletApp.Domain.Users.Common;
 using WalletApp.Domain.Users.Models;
 using WalletApp.Persistence.Context;
