@@ -1,4 +1,5 @@
-﻿using WalletApp.Domain.Common;
+﻿using WalletApp.Domain.Cards.Models;
+using WalletApp.Domain.Common;
 using WalletApp.Domain.Transactions.Models;
 
 namespace WalletApp.Domain.Users.Models
@@ -12,6 +13,7 @@ namespace WalletApp.Domain.Users.Models
         public long DailyPoints { get; private set; }
         public int CardId { get; private set; }
 
+        public Card Card { get; private set; }
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
     }
 }
