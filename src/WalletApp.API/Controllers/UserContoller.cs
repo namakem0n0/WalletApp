@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WalletApp.API.Constants;
 using WalletApp.Domain.Common;
+using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Models;
 using WalletApp.Persistence.Context;
 
@@ -30,6 +31,18 @@ namespace WalletApp.API.Controllers
         {
             var asset = await _unitOfWork.Users.GetById(userId);
             return Ok(asset);
+        }
+
+        [HttpGet("transactions")]
+        public async Task<IReadOnlyCollection<MoneyTransaction>> GetAllUserTransactions(int userId)
+        {
+            return await _unitOfWork.MoneyTransactions.GetAllTransactions(userId);
+        }
+
+        [HttpGet("lastTenTransactions")]
+        public async Task<IReadOnlyCollection<MoneyTransaction>> GetLastTenUserTransactions(int userId)
+        {
+            return await _unitOfWork.MoneyTransactions.GetLastTenTransactions(userId);
         }
     }
 }

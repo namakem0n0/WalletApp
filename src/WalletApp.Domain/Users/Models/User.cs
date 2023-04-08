@@ -11,6 +11,7 @@ namespace WalletApp.Domain.Users.Models
         public string Email { get; private set; }
         public string Password { get; private set; }
         public long DailyPoints { get; private set; }
+        public bool DueIsPayed {get; private set; }
         public int CardId { get; private set; }
 
         public Card Card { get; private set; }
