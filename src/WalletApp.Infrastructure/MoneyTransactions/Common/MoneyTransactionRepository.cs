@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WalletApp.Domain.Transaction.Common;
-using WalletApp.Domain.Transaction.Models;
+using WalletApp.Domain.Transactions.Common;
+using WalletApp.Domain.Transactions.Models;
 using WalletApp.Persistence.Context;
 
 namespace WalletApp.Infrastructure.MoneyTransactions.Common

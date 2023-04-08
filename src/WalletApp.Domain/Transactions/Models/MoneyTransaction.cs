@@ -1,7 +1,7 @@
 ﻿using WalletApp.Domain.Common;
 using WalletApp.Domain.Users.Models;
 
-namespace WalletApp.Domain.Transaction.Models
+namespace WalletApp.Domain.Transactions.Models
 {
     public class MoneyTransaction : Entity, IAggregateRoot
     {

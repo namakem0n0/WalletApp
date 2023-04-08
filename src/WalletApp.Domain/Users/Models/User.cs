@@ -1,5 +1,6 @@
 ﻿using WalletApp.Domain.Common;
-using WalletApp.Domain.Transaction.Models;
+using WalletApp.Domain.Transactions.Models;
+
 namespace WalletApp.Domain.Users.Models
 {
     public class User : Entity, IAggregateRoot

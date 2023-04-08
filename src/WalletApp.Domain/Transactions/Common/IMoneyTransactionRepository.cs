@@ -1,6 +1,6 @@
-﻿using WalletApp.Domain.Transaction.Models;
+﻿using WalletApp.Domain.Transactions.Models;
 
-namespace WalletApp.Domain.Transaction.Common
+namespace WalletApp.Domain.Transactions.Common
 {
     public interface IMoneyTransactionRepository
     {

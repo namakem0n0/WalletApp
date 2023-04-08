@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WalletApp.Domain.Transaction.Models;
+using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Models;
 
 namespace WalletApp.Persistence.Context

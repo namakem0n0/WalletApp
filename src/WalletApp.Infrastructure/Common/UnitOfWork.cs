@@ -1,5 +1,5 @@
 ﻿using WalletApp.Domain.Common;
-using WalletApp.Domain.Transaction.Common;
+using WalletApp.Domain.Transactions.Common;
 using WalletApp.Domain.Users.Common;
 using WalletApp.Infrastructure.MoneyTransactions.Common;
 using WalletApp.Infrastructure.Users.Common;
