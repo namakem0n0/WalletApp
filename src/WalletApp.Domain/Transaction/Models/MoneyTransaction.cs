@@ -1,8 +1,9 @@
-﻿using WalletApp.Domain.Users.Models;
+﻿using WalletApp.Domain.Common;
+using WalletApp.Domain.Users.Models;
 
 namespace WalletApp.Domain.Transaction.Models
 {
-    public class MoneyTransaction
+    public class MoneyTransaction : Entity, IAggregateRoot
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

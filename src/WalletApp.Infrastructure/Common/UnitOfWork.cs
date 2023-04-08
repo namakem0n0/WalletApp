@@ -1,8 +1,8 @@
 ﻿using WalletApp.Domain.Common;
 using WalletApp.Domain.Transaction.Common;
 using WalletApp.Domain.Users.Common;
-using WalletApp.Domain.Users.Models;
 using WalletApp.Infrastructure.MoneyTransactions.Common;
+using WalletApp.Infrastructure.Users.Common;
 using WalletApp.Persistence.Context;
 
 namespace WalletApp.Infrastructure.Common
@@ -11,14 +11,14 @@ namespace WalletApp.Infrastructure.Common
     {
         private readonly WalletAppDbContext _context;
 
-        public IMoneyTransactionRepository Transactions { get; private set; }
         public IUserRepository Users { get; private set; }
+        public IMoneyTransactionRepository MoneyTransactions { get; private set; }
 
         public UnitOfWork(WalletAppDbContext context)
         {
             _context = context;
-            Transactions = new MoneyTransactionRepository(_context);
-            Users = new User
+            MoneyTransactions = new MoneyTransactionRepository(_context);
+            Users = new UserRepository(_context);
         }
 
         public async Task Complete()

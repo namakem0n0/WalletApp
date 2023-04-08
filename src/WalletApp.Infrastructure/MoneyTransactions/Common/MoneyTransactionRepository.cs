@@ -24,7 +24,7 @@ namespace WalletApp.Infrastructure.MoneyTransactions.Common
             return await _context.MoneyTransactions.FindAsync(id);
         }
 
-        void Add(MoneyTransaction transaction)
+        public void Add(MoneyTransaction transaction)
         {
             _context.MoneyTransactions.Add(transaction);
         }

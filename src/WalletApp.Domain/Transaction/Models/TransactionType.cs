@@ -9,6 +9,6 @@ namespace WalletApp.Domain.Transaction.Models
     public enum TransactionType
     {
         Payment = 0,
-        Credit = 1,
+        Credit = 1
     }
 }

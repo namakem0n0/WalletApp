@@ -7,9 +7,30 @@ namespace WalletApp.Domain.DailyPoints
     private DateTime _seasonStartDate;
     private int _points;
     
-    public DailyPointsCalculator(DateTime seasonStartDate)
+    public DailyPointsCalculator()
     {
-        _seasonStartDate = seasonStartDate.Date;
+        DateTime now = SystemClock.Now;
+
+        if (now.Month >= 1 && now.Month <= 3)
+        {
+            // Spring - first day of March
+            _seasonStartDate = new DateTime(now.Year, 3, 1);
+        }
+        else if (now.Month >= 4 && now.Month <= 6)
+        {
+            // Summer - first day of June
+            _seasonStartDate = new DateTime(now.Year, 6, 1);
+        }
+        else if (now.Month >= 7 && now.Month <= 9)
+        {
+            // Autumn - first day of September
+            _seasonStartDate = new DateTime(now.Year, 9, 1);
+        }
+        else
+        {
+            // Winter - first day of December
+            _seasonStartDate = new DateTime(now.Year, 12, 1);
+        }
         _points = 0;
     }
     
