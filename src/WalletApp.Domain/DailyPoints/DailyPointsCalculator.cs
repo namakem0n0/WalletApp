@@ -2,12 +2,12 @@
 
 namespace WalletApp.Domain.DailyPoints
 {
-    public class DailyPointsCalculator
+    public static class DailyPointsCalculator
 {
-    private DateTime _seasonStartDate;
-    private int _points;
+    private static DateTime _seasonStartDate;
+    private static int _points;
     
-    public DailyPointsCalculator()
+    static DailyPointsCalculator()
     {
         DateTime now = SystemClock.Now;
 
@@ -34,7 +34,7 @@ namespace WalletApp.Domain.DailyPoints
         _points = 0;
     }
     
-    public int CalculatePoints()
+    public static int CalculatePoints()
     {
         var currentDayOfYear = SystemClock.Now.DayOfYear;
         var startDayOfYear = _seasonStartDate.DayOfYear;
@@ -60,7 +60,7 @@ namespace WalletApp.Domain.DailyPoints
         return _points;
     }
     
-    public string FormatPoints(int points)
+    public static string FormatPoints(int points)
     {
         if (points >= 1000)
         {

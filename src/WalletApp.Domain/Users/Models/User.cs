@@ -6,6 +6,18 @@ namespace WalletApp.Domain.Users.Models
 {
     public class User : Entity, IAggregateRoot
     {
+        private User() { }
+
+        private User(string name, string email, string password, long dailyPoints, bool dueIsPayed, int cardId)
+        {
+            Name = name;
+            Email = email;
+            Password = password;
+            DailyPoints = dailyPoints;
+            DueIsPayed = dueIsPayed;
+            CardId = cardId;
+        }
+
         public int Id { get; init; }
         public string Name { get; private set; }
         public string Email { get; private set; }
@@ -16,5 +28,7 @@ namespace WalletApp.Domain.Users.Models
 
         public Card Card { get; private set; }
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
+
+        public static User Create(UserCreateData data)
     }
 }

@@ -2,6 +2,7 @@
 using WalletApp.API.Constants;
 using WalletApp.Domain.Common;
 using WalletApp.Domain.Transactions.Models;
+using WalletApp.Domain.Users.Data;
 using WalletApp.Domain.Users.Models;
 using WalletApp.Persistence.Context;
 
@@ -31,6 +32,14 @@ namespace WalletApp.API.Controllers
         {
             var asset = await _unitOfWork.Users.GetById(userId);
             return Ok(asset);
+        }
+
+        [HttpPost]
+        public async Task<int> CreateUser(UserCreateData data)
+        {
+            var newUser = Domain.Users.Models.User.Create(data);
+            _unitOfWork.Users.Add(newUser);
+            return newUser.Id;
         }
 
         [HttpGet("transactions")]
