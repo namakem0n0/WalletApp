@@ -12,8 +12,6 @@ namespace WalletApp.Persistence.EntityConfigurations
 
             builder.HasOne(u => u.Card)
                 .WithOne();
-            builder.HasMany(u => u.MoneyTransactions)
-                .WithOne();
         }
     }
 }

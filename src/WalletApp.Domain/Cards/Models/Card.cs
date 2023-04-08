@@ -6,6 +6,5 @@ namespace WalletApp.Domain.Cards.Models
     {
         public int Id { get; init; }
         public decimal Balance { get; set; }
-        public int UserId { get; private set; }
     }
 }

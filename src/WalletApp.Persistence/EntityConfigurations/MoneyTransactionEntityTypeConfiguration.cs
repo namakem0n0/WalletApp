@@ -10,7 +10,9 @@ namespace WalletApp.Persistence.EntityConfigurations
         {
             builder.ToTable("MoneyTransactions");
 
-            builder.HasOne(t => t.AuthorizedUser).WithMany();
+            builder.HasOne(t => t.AuthorizedUser)
+                .WithMany()
+                .HasForeignKey(t=>t.UserId);
         }
     }
 }
