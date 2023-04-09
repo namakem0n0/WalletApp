@@ -39,7 +39,14 @@ namespace WalletApp.Domain.Users.Models
                 data.Email,
                 data.Password,
                 data.DueIsPayed);
+            user.GetRandomBalance();
             return user;
+        }
+
+        private decimal GetRandomBalance()
+        {
+            Random random = new Random();
+            return (decimal)random.NextDouble() * Limit;
         }
 
         public void ChangeBalance(decimal amount)

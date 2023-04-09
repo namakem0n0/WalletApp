@@ -11,7 +11,6 @@ namespace WalletApp.API.MoneyTransactions.Mappers
             request.Amount,
             request.UserId,
             request.Type,
-            request.Date,
             request.IsPending);
     }
 }

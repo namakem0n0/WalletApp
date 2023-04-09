@@ -8,6 +8,5 @@ namespace WalletApp.Domain.Transactions.Data
         decimal Amount,
         int UserId,
         TransactionType Type,
-        DateTime Date,
         bool IsPending);
 }

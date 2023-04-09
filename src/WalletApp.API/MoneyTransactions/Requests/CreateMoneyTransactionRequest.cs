@@ -8,6 +8,5 @@ namespace WalletApp.API.MoneyTransactions.Requests
         decimal Amount,
         int UserId,
         TransactionType Type,
-        DateTime Date,
         bool IsPending);
 }
