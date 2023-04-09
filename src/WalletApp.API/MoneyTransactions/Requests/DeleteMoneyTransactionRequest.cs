@@ -1,4 +1,4 @@
 ﻿namespace WalletApp.API.MoneyTransactions.Requests
 {
-    public record DeleteMoneyTransactionRequest(int id);
+    public record DeleteMoneyTransactionRequest(int transactionId);
 }

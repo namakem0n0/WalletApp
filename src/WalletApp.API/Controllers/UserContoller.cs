@@ -6,7 +6,6 @@ using WalletApp.API.Users.Mappers;
 using WalletApp.API.Users.Requests;
 using WalletApp.Domain.Common;
 using WalletApp.Domain.Transactions.Models;
-using WalletApp.Domain.Users.Data;
 using WalletApp.Domain.Users.Models;
 using WalletApp.Persistence.Context;
 
@@ -43,7 +42,9 @@ namespace WalletApp.API.Controllers
         {
             var data = request.AsData();
             var newUser = Domain.Users.Models.User.Create(data);
+
             _unitOfWork.Users.Add(newUser);
+            await _unitOfWork.Complete();
 
             return newUser.Id;
         }
@@ -66,7 +67,7 @@ namespace WalletApp.API.Controllers
             return await _unitOfWork.MoneyTransactions.GetById(transactionId);
         }
 
-        [HttpPost]
+        [HttpPost("createTransaction")]
         public async Task<int> CreateTransaction(CreateMoneyTransactionRequest request)
         {
             var data = request.AsData();
@@ -79,6 +80,7 @@ namespace WalletApp.API.Controllers
                 user.ChangeBalance(newTransaction.Amount * (-1));
 
             _unitOfWork.MoneyTransactions.Add(newTransaction);
+            await _unitOfWork.Complete();
 
             return newTransaction.Id;
         }
@@ -86,7 +88,6 @@ namespace WalletApp.API.Controllers
         [HttpDelete]
         public async Task<int> RemoveTransaction(DeleteMoneyTransactionRequest request)
         {
-            
             var transactionToDelete = await _unitOfWork.MoneyTransactions.GetById(request.transactionId);
 
             if (transactionToDelete == null)
@@ -99,11 +100,10 @@ namespace WalletApp.API.Controllers
             if (transactionToDelete.Type == TransactionType.Credit)
                 user.ChangeBalance(transactionToDelete.Amount);
 
-            _unitOfWork.MoneyTransactions.Add(transactionToDelete);
+            _unitOfWork.MoneyTransactions.Delete(transactionToDelete);
+            await _unitOfWork.Complete();
 
             return transactionToDelete.Id;
         }
-
-
     }
 }

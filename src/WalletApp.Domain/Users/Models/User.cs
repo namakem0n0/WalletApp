@@ -43,10 +43,10 @@ namespace WalletApp.Domain.Users.Models
             return user;
         }
 
-        private decimal GetRandomBalance()
+        private void GetRandomBalance()
         {
             Random random = new Random();
-            return (decimal)random.NextDouble() * Limit;
+            Balance = (decimal)random.NextDouble() * Limit;
         }
 
         public void ChangeBalance(decimal amount)
