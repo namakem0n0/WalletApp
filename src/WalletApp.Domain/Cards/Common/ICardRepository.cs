@@ -1,5 +1,4 @@
 ﻿using WalletApp.Domain.Cards.Models;
-using WalletApp.Domain.Users.Models;
 
 namespace WalletApp.Domain.Cards.Common
 {
