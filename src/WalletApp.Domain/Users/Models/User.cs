@@ -1,4 +1,4 @@
-﻿using WalletApp.Domain.Cards.Models;
+﻿using System.Reflection.Metadata;
 using WalletApp.Domain.Common;
 using WalletApp.Domain.DailyPoints;
 using WalletApp.Domain.Transactions.Models;
@@ -10,24 +10,26 @@ namespace WalletApp.Domain.Users.Models
     {
         private User() { }
 
-        private User(string name, string email, string password, bool dueIsPayed, Card card)
+        private User(string name, string email, string password, bool dueIsPayed)
         {
             Name = name;
             Email = email;
             Password = password;
             DueIsPayed = dueIsPayed;
-            Card = card;
         }
+
+        private const decimal Limit = 1500m;
 
         public int Id { get; init; }
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
-        public long DailyPoints => DailyPointsCalculator.CalculatePoints();
+        public decimal Balance { get; private set; }
         public bool DueIsPayed {get; private set; }
-        public int CardId { get; private set; }
 
-        public Card Card { get; private set; }
+        public decimal Available => Limit - Balance;
+        public long DailyPoints => DailyPointsCalculator.CalculatePoints();
+
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
 
         public static User Create(UserCreateData data)
@@ -36,9 +38,21 @@ namespace WalletApp.Domain.Users.Models
                 data.Name,
                 data.Email,
                 data.Password,
-                data.DueIsPayed,
-                data.Card);
+                data.DueIsPayed);
             return user;
+        }
+
+        public void ChangeBalance(decimal amount)
+        {
+            if (Balance + amount > Limit)
+            {
+                throw new InvalidOperationException("Cannot exceed maximum balance.");
+            }
+            if (Balance + amount < 0M)
+            {
+                throw new InvalidOperationException("Balance cannot be negative.");
+            }
+            Balance += amount;
         }
     }
 }

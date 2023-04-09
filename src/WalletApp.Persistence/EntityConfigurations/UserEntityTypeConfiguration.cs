@@ -9,9 +9,6 @@ namespace WalletApp.Persistence.EntityConfigurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users");
-
-            builder.HasOne(u => u.Card)
-                .WithOne();
         }
     }
 }

@@ -15,14 +15,12 @@ namespace WalletApp.Infrastructure.Common
 
         public IUserRepository Users { get; private set; }
         public IMoneyTransactionRepository MoneyTransactions { get; private set; }
-        public ICardRepository Cards { get; private set; }
 
         public UnitOfWork(WalletAppDbContext context)
         {
             _context = context;
             MoneyTransactions = new MoneyTransactionRepository(_context);
             Users = new UserRepository(_context);
-            Cards = new CardRepository(_context);
         }
 
         public async Task Complete()

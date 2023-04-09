@@ -4,6 +4,5 @@
         string Name,
         string Email,
         string Password,
-        bool DueIsPayed,
-        int CardId);
+        bool DueIsPayed);
 }

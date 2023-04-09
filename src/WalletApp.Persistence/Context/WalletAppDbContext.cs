@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WalletApp.Domain.Cards.Models;
 using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Models;
 
@@ -9,7 +8,6 @@ namespace WalletApp.Persistence.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<MoneyTransaction> MoneyTransactions { get; set; }
-        public DbSet<Card> Cards { get; set; }
 
         public WalletAppDbContext(DbContextOptions<WalletAppDbContext> options) : base(options)
         {

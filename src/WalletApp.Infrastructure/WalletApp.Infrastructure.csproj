@@ -20,4 +20,8 @@
     <ProjectReference Include="..\WalletApp.Persistence\WalletApp.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cards\" />
+  </ItemGroup>
+
 </Project>
