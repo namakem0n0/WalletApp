@@ -19,8 +19,6 @@ namespace WalletApp.Domain.Cards.Models
         public decimal Balance { get; private set; }
         public decimal Available => Limit - Balance;
 
-
-
         public static Card Create(CardCreateData data)
         {
             var card = new Card(

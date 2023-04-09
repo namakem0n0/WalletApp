@@ -10,13 +10,13 @@ namespace WalletApp.Domain.Users.Models
     {
         private User() { }
 
-        private User(string name, string email, string password, bool dueIsPayed, int cardId)
+        private User(string name, string email, string password, bool dueIsPayed, Card card)
         {
             Name = name;
             Email = email;
             Password = password;
             DueIsPayed = dueIsPayed;
-            CardId = cardId;
+            Card = card;
         }
 
         public int Id { get; init; }
@@ -37,7 +37,7 @@ namespace WalletApp.Domain.Users.Models
                 data.Email,
                 data.Password,
                 data.DueIsPayed,
-                data.CardId);
+                data.Card);
             return user;
         }
     }
