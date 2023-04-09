@@ -1,6 +1,8 @@
 ﻿using WalletApp.Domain.Cards.Models;
 using WalletApp.Domain.Common;
+using WalletApp.Domain.DailyPoints;
 using WalletApp.Domain.Transactions.Models;
+using WalletApp.Domain.Users.Data;
 
 namespace WalletApp.Domain.Users.Models
 {
@@ -30,5 +32,15 @@ namespace WalletApp.Domain.Users.Models
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
 
         public static User Create(UserCreateData data)
+        {
+            var user = new User(
+                data.Name,
+                data.Email,
+                data.Password,
+                DailyPointsCalculator.CalculatePoints(),
+                data.DueIsPayed,
+                data.CardId);
+            return user;
+        }
     }
 }

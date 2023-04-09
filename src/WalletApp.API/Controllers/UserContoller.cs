@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WalletApp.API.Constants;
+using WalletApp.API.MoneyTransactions.Mappers;
+using WalletApp.API.MoneyTransactions.Requests;
 using WalletApp.API.Users.Mappers;
 using WalletApp.API.Users.Requests;
 using WalletApp.Domain.Common;
@@ -56,6 +58,16 @@ namespace WalletApp.API.Controllers
         public async Task<IReadOnlyCollection<MoneyTransaction>> GetLastTenUserTransactions(int userId)
         {
             return await _unitOfWork.MoneyTransactions.GetLastTenTransactions(userId);
+        }
+
+        [HttpPost]
+        public async Task<int> CreateTransaction(CreateMoneyTransactionRequest request)
+        {
+            var data = request.AsData();
+            var newTransaction = MoneyTransaction.Create(data);
+            _unitOfWork.MoneyTransactions.Add(newTransaction);
+
+            return newTransaction.Id;
         }
     }
 }
