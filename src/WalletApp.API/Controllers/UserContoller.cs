@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WalletApp.API.Cards.Mappers;
+using WalletApp.API.Cards.Requests;
 using WalletApp.API.Constants;
 using WalletApp.API.MoneyTransactions.Mappers;
 using WalletApp.API.MoneyTransactions.Requests;
 using WalletApp.API.Users.Mappers;
 using WalletApp.API.Users.Requests;
+using WalletApp.Domain.Cards.Models;
 using WalletApp.Domain.Common;
 using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Data;
@@ -60,6 +63,12 @@ namespace WalletApp.API.Controllers
             return await _unitOfWork.MoneyTransactions.GetLastTenTransactions(userId);
         }
 
+        [HttpGet]
+        public async Task<MoneyTransaction> GetTransactionById(int transactionId)
+        {
+            return await _unitOfWork.MoneyTransactions.GetById(transactionId);
+        }
+
         [HttpPost]
         public async Task<int> CreateTransaction(CreateMoneyTransactionRequest request)
         {
@@ -68,6 +77,28 @@ namespace WalletApp.API.Controllers
             _unitOfWork.MoneyTransactions.Add(newTransaction);
 
             return newTransaction.Id;
+        }
+
+        [HttpGet("/cards")]
+        public async Task<IReadOnlyCollection<Card>> GetAllCards()
+        {
+            return await _unitOfWork.Cards.GetAllCards();
+        }
+
+        [HttpGet("card")]
+        public async Task<Card> GetCardById(int cardId)
+        {
+            return await _unitOfWork.Cards.GetById(cardId);
+        }
+
+        [HttpPost]
+        public async Task<int> CreateCard(CreateCardRequest request)
+        {
+            var data = request.AsData();
+            var newCard = Card.Create(data);
+            _unitOfWork.Cards.Add(newCard);
+
+            return newCard.Id;
         }
     }
 }

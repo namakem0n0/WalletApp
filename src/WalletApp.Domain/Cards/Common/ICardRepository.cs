@@ -6,6 +6,7 @@ namespace WalletApp.Domain.Cards.Common
     {
         Task<IReadOnlyCollection<Card>> GetAllCards();
         Task<Card> GetById(int id);
+        //Task<Card> Update(Card card);
         void Add(Card card);
     }
 }
