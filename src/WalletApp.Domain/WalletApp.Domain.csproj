@@ -15,10 +15,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Cards\Common\" />
-    <Folder Include="Cards\Data\" />
-    <Folder Include="Cards\Models\" />
-  </ItemGroup>
-
 </Project>
