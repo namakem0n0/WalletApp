@@ -10,12 +10,11 @@ namespace WalletApp.Domain.Users.Models
     {
         private User() { }
 
-        private User(string name, string email, string password, long dailyPoints, bool dueIsPayed, int cardId)
+        private User(string name, string email, string password, bool dueIsPayed, int cardId)
         {
             Name = name;
             Email = email;
             Password = password;
-            DailyPoints = dailyPoints;
             DueIsPayed = dueIsPayed;
             CardId = cardId;
         }
@@ -24,7 +23,7 @@ namespace WalletApp.Domain.Users.Models
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
-        public long DailyPoints { get; private set; }
+        public long DailyPoints => DailyPointsCalculator.CalculatePoints();
         public bool DueIsPayed {get; private set; }
         public int CardId { get; private set; }
 
@@ -37,7 +36,6 @@ namespace WalletApp.Domain.Users.Models
                 data.Name,
                 data.Email,
                 data.Password,
-                DailyPointsCalculator.CalculatePoints(),
                 data.DueIsPayed,
                 data.CardId);
             return user;

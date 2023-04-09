@@ -4,7 +4,6 @@
         string Name,
         string Email,
         string Password,
-        long DailyPoints,
         bool DueIsPayed,
         int CardId);
 }

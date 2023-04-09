@@ -9,7 +9,6 @@ namespace WalletApp.API.Users.Mappers
             new(request.Name,
                 request.Email,
                 request.Password,
-                request.DailyPoints,
                 request.DueIsPayed,
                 request.CardId);
     }
