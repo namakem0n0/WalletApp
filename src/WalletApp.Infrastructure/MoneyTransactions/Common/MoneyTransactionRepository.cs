@@ -32,10 +32,14 @@ namespace WalletApp.Infrastructure.MoneyTransactions.Common
             return transactions.AsReadOnly();
         }
 
-
         public async Task<MoneyTransaction> GetById(int id)
         {
             return await _context.MoneyTransactions.FindAsync(id);
+        }
+
+        public void Delete(MoneyTransaction transaction)
+        {
+            _context.MoneyTransactions.Remove(transaction);
         }
 
         public void Add(MoneyTransaction transaction)

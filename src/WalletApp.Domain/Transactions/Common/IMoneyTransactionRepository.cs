@@ -7,6 +7,7 @@ namespace WalletApp.Domain.Transactions.Common
         Task<IReadOnlyCollection<MoneyTransaction>> GetAllTransactions(int userid);
         Task<IReadOnlyCollection<MoneyTransaction>> GetLastTenTransactions(int userId);
         Task<MoneyTransaction> GetById(int id);
+        void Delete(MoneyTransaction transaction);
         void Add(MoneyTransaction transaction);
     }
 }

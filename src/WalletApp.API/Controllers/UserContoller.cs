@@ -82,5 +82,28 @@ namespace WalletApp.API.Controllers
 
             return newTransaction.Id;
         }
+
+        [HttpDelete]
+        public async Task<int> RemoveTransaction(DeleteMoneyTransactionRequest request)
+        {
+            
+            var transactionToDelete = await _unitOfWork.MoneyTransactions.GetById(request.transactionId);
+
+            if (transactionToDelete == null)
+                return -1;
+
+            var user = await _unitOfWork.Users.GetById(transactionToDelete.UserId);
+
+            if (transactionToDelete.Type == TransactionType.Payment)
+                user.ChangeBalance(transactionToDelete.Amount * (-1));
+            if (transactionToDelete.Type == TransactionType.Credit)
+                user.ChangeBalance(transactionToDelete.Amount);
+
+            _unitOfWork.MoneyTransactions.Add(transactionToDelete);
+
+            return transactionToDelete.Id;
+        }
+
+
     }
 }
