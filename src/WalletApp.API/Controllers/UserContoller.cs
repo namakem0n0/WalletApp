@@ -74,6 +74,14 @@ namespace WalletApp.API.Controllers
         {
             var data = request.AsData();
             var newTransaction = MoneyTransaction.Create(data);
+            var user = await _unitOfWork.Users.GetById(newTransaction.UserId);
+            var card = await _unitOfWork.Cards.GetById(user.CardId);
+
+            if(newTransaction.Type == TransactionType.Payment)
+                card.ChangeBalance(newTransaction.Amount);
+            if(newTransaction.Type == TransactionType.Credit)
+                card.ChangeBalance(newTransaction.Amount * (-1));
+
             _unitOfWork.MoneyTransactions.Add(newTransaction);
 
             return newTransaction.Id;

@@ -29,6 +29,18 @@ namespace WalletApp.Domain.Cards.Models
             return card;
         }
 
+        public void ChangeBalance(decimal amount)
+        {
+            if (Balance + amount > Limit)
+            {
+                throw new InvalidOperationException("Cannot exceed maximum balance.");
+            }
+            if (Balance + amount < 0M)
+            {
+                throw new InvalidOperationException("Balance cannot be negative.");
+            }
+            Balance += amount;
+        }
 
     }
 }
