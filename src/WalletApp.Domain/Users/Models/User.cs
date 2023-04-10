@@ -1,8 +1,9 @@
-﻿using System.Reflection.Metadata;
-using WalletApp.Domain.Common;
+﻿using WalletApp.Domain.Common;
 using WalletApp.Domain.DailyPoints;
+using WalletApp.Domain.Exceptions;
 using WalletApp.Domain.Transactions.Models;
 using WalletApp.Domain.Users.Data;
+using WalletApp.Domain.Users.Validator;
 
 namespace WalletApp.Domain.Users.Models
 {
@@ -40,6 +41,8 @@ namespace WalletApp.Domain.Users.Models
                 data.Password,
                 data.DueIsPayed);
             user.GetRandomBalance();
+
+            UserValidator.ValidateUser(user);
             return user;
         }
 
@@ -53,11 +56,11 @@ namespace WalletApp.Domain.Users.Models
         {
             if (Balance + amount > Limit)
             {
-                throw new InvalidOperationException("Cannot exceed maximum balance.");
+                throw new BalanceChangeException("Cannot exceed maximum balance.");
             }
             if (Balance + amount < 0M)
             {
-                throw new InvalidOperationException("Balance cannot be negative.");
+                throw new BalanceChangeException("Balance cannot be negative.");
             }
             Balance += amount;
         }

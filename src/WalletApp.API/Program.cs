@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WalletApp.API.Exceptions;
 using WalletApp.Domain.Common;
 using WalletApp.Infrastructure.Common;
 using WalletApp.Persistence.Context;
@@ -24,11 +25,13 @@ namespace WalletApp.API
                     builder.Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(WalletAppDbContext).Assembly.FullName)));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<ExceptionHandlerMiddleware>();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseMiddleware<ExceptionHandlerMiddleware>();
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WalletApp.Api v1"));
