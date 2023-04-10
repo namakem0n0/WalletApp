@@ -79,6 +79,7 @@ namespace WalletApp.API.Controllers
             if(newTransaction.Type == TransactionType.Credit)
                 user.ChangeBalance(newTransaction.Amount * (-1));
 
+            _unitOfWork.Users.Update(user);
             _unitOfWork.MoneyTransactions.Add(newTransaction);
             await _unitOfWork.Complete();
 
@@ -90,9 +91,6 @@ namespace WalletApp.API.Controllers
         {
             var transactionToDelete = await _unitOfWork.MoneyTransactions.GetById(request.transactionId);
 
-            if (transactionToDelete == null)
-                return -1;
-
             var user = await _unitOfWork.Users.GetById(transactionToDelete.UserId);
 
             if (transactionToDelete.Type == TransactionType.Payment)
@@ -100,6 +98,7 @@ namespace WalletApp.API.Controllers
             if (transactionToDelete.Type == TransactionType.Credit)
                 user.ChangeBalance(transactionToDelete.Amount);
 
+            _unitOfWork.Users.Update(user);
             _unitOfWork.MoneyTransactions.Delete(transactionToDelete);
             await _unitOfWork.Complete();
 

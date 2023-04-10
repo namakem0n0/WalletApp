@@ -39,6 +39,8 @@ namespace WalletApp.Infrastructure.MoneyTransactions.Common
 
         public void Delete(MoneyTransaction transaction)
         {
+            if (_context.MoneyTransactions.Find(transaction.Id) == null)
+                throw new ArgumentNullException("Transaction do not exist");
             _context.MoneyTransactions.Remove(transaction);
         }
 

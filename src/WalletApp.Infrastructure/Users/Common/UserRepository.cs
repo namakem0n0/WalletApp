@@ -28,5 +28,10 @@ namespace WalletApp.Infrastructure.Users.Common
         {
             _context.Users.Add(user);
         }
+
+        public void Update(User user)
+        {
+            _context.Users.Update(user);
+        }
     }
 }

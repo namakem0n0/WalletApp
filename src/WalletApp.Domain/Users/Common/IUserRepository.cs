@@ -8,5 +8,6 @@ namespace WalletApp.Domain.Users.Common
         Task<IReadOnlyCollection<User>> GetAllUsers();
         Task<User> GetById(int id);
         void Add(User user);
+        void Update(User user);
     }
 }
