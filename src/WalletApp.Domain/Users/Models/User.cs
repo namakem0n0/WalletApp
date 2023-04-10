@@ -1,4 +1,5 @@
-﻿using WalletApp.Domain.Common;
+﻿using WalletApp.Domain.Clock;
+using WalletApp.Domain.Common;
 using WalletApp.Domain.DailyPoints;
 using WalletApp.Domain.Exceptions;
 using WalletApp.Domain.Transactions.Models;
@@ -29,7 +30,7 @@ namespace WalletApp.Domain.Users.Models
         public bool DueIsPayed {get; private set; }
 
         public decimal Available => Limit - Balance;
-        public long DailyPoints => DailyPointsCalculator.CalculatePoints();
+        public long DailyPoints => DailyPointsCalculator.CalculatePoints(SystemClock.Now);
 
         public List<MoneyTransaction> MoneyTransactions { get; private set; }
 

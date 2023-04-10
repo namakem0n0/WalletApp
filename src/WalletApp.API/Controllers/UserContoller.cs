@@ -33,8 +33,8 @@ namespace WalletApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUser(int userId)
         {
-            var asset = await _unitOfWork.Users.GetById(userId);
-            return Ok(asset);
+            var user = await _unitOfWork.Users.GetById(userId);
+            return Ok(user);
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace WalletApp.API.Controllers
             return await _unitOfWork.MoneyTransactions.GetLastTenTransactions(userId);
         }
 
-        [HttpGet]
+        [HttpGet("/transactions")]
         public async Task<MoneyTransaction> GetTransactionById(int transactionId)
         {
             return await _unitOfWork.MoneyTransactions.GetById(transactionId);
@@ -79,6 +79,7 @@ namespace WalletApp.API.Controllers
             if(newTransaction.Type == TransactionType.Credit)
                 user.ChangeBalance(newTransaction.Amount * (-1));
 
+            user.MoneyTransactions.Add(newTransaction);
             _unitOfWork.Users.Update(user);
             _unitOfWork.MoneyTransactions.Add(newTransaction);
             await _unitOfWork.Complete();
@@ -98,6 +99,7 @@ namespace WalletApp.API.Controllers
             if (transactionToDelete.Type == TransactionType.Credit)
                 user.ChangeBalance(transactionToDelete.Amount);
 
+            user.MoneyTransactions.Remove(transactionToDelete);
             _unitOfWork.Users.Update(user);
             _unitOfWork.MoneyTransactions.Delete(transactionToDelete);
             await _unitOfWork.Complete();
